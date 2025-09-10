@@ -4,7 +4,7 @@
 
 This is a lightweight, portable utility for Windows that adds a "Compress to .7z & Delete" option to the context menu. It's a handy tool for users who need to quickly archive and clean up project files, logs, or any other data.
 
-![示意圖](https://i.imgur.com/K1Y1K5l.png)
+![示意圖](./Right-Click-7z-Delete-Tool.jpg)
 
 ---
 
