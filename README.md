@@ -19,22 +19,14 @@ This is a lightweight, portable utility for Windows that adds a "Compress to .7z
 📂 檔案結構 (File Structure)
 這個工具包由以下 4 個檔案組成：
 
-```
 /Your-Folder/
-
 |
-
 |-- 7zr.exe            # 7-Zip 壓縮引擎 (The compression engine)
-
 |-- zip_and_delete.vbs # 核心功能腳本 (The core logic script)
-
 |-- Install_Menu.bat   # 安裝右鍵選單 (The installer)
-
 |-- Uninstall_Menu.bat # 移除右鍵選單 (The uninstaller)
-
-```
-
 🚀 如何使用 (How to Use)
+
 1. 首次安裝 (First-time Setup)
 將這四個檔案 (7zr.exe, zip_and_delete.vbs, Install_Menu.bat, Uninstall_Menu.bat) 放在同一個資料夾內。
 
@@ -60,6 +52,11 @@ This is a lightweight, portable utility for Windows that adds a "Compress to .7z
 
 之後您可以隨時刪除整個工具資料夾。
 
+⚠️ 已知限制與解決方案 (Known Limitations & Workaround)
+問題：對於某些受 Windows 系統高度整合的檔案類型（例如 .img, .iso 等磁碟映像檔），雖然本工具的選項會出現在右鍵選單中，但點擊後可能不會執行壓縮，而是觸發系統預設的「開啟」或「掛載」動作。這是因為這些檔案類型的預設動作，擁有比本工具更高的執行優先級。
+
+解決方案：遇到這種情況時，最簡單的方法是：建立一個新資料夾，將該檔案移入資料夾中，然後對該資料夾點擊右鍵，即可使用本工具進行壓縮。
+
 🛠️ 技術細節 (Technical Details)
 核心引擎：使用 7zr.exe，這是 7-Zip 的獨立命令列版本，僅支援 .7z 格式，體積最小。
 
@@ -69,6 +66,8 @@ This is a lightweight, portable utility for Windows that adds a "Compress to .7z
 
 致謝 (Acknowledgements)
 本工具的核心壓縮功能由 7zr.exe 提供，該程式來自於 7-Zip 專案，由 Igor Pavlov 開發。
+
+7-Zip 專案主要基於 GNU LG一份專案，由 Igor Pavlov 開發。
 
 7-Zip 專案主要基於 GNU LGPL 授權。更多詳細資訊請參閱 7-Zip 官網授權頁面。
 
