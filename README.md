@@ -25,8 +25,8 @@ This is a lightweight, portable utility for Windows that adds a "Compress to .7z
 
 * **`7zr.exe`**: 7-Zip 壓縮引擎 (The compression engine)
 * **`zip_and_delete.vbs`**: 核心功能腳本 (The core logic script)
-* **`Install_Menu.bat`**: 安裝右鍵選單 (The installer)
-* **`Uninstall_Menu.bat`**: 移除右鍵選單 (The uninstaller)
+* **`Run_as_ADMIN_Install_Menu.bat`**: 安裝右鍵選單 (The installer)
+* **`Run_as_ADMIN_Uninstall_Menu.bat`**: 移除右鍵選單 (The uninstaller)
 
 ---
 
@@ -34,11 +34,13 @@ This is a lightweight, portable utility for Windows that adds a "Compress to .7z
 
 ### 1. 首次安裝 (First-time Setup)
 
-1.  將這四個檔案 (`7zr.exe`, `zip_and_delete.vbs`, `Install_Menu.bat`, `Uninstall_Menu.bat`) 放在同一個資料夾內。
+1.  將這四個檔案 (`7zr.exe`, `zip_and_delete.vbs`, `Run_as_ADMIN_Install_Menu.bat`, `Run_as_ADMIN_Uninstall_Menu.bat`) 放在同一個資料夾內。
 2.  將這個資料夾移動到您打算長期存放的位置 (例如 `D:\Tools\7z-Util`)。
-3.  在 `Install_Menu.bat` 檔案上**點擊右鍵**，選擇「**以系統管理員身分執行**」。
+3.  在 `Run_as_ADMIN_Install_Menu.bat` 檔案上**點擊右鍵**，選擇「**以系統管理員身分執行**」。
 4.  在跳出的確認視窗中點擊「是」。
 5.  安裝完成！右鍵選單中現在應該會出現「加入壓縮檔(.7z)並刪除」的選項。
+
+> ⚠️ **重要提示**：如果您之後需要搬移此工具的資料夾位置，請務必先在新位置重新執行 `Run_as_ADMIN_Install_Menu.bat`。如果發現右鍵選單失效，請先執行 `Run_as_ADMIN_Uninstall_Menu.bat` 移除舊設定，再重新安裝。
 
 ### 2. 日常使用 (Daily Use)
 
@@ -48,7 +50,7 @@ This is a lightweight, portable utility for Windows that adds a "Compress to .7z
 
 ### 3. 移除工具 (Uninstall)
 
-1.  在 `Uninstall_Menu.bat` 檔案上**點擊右鍵**，選擇「**以系統管理員身分執行**」。
+1.  在 `Run_as_ADMIN_Uninstall_Menu.bat` 檔案上**點擊右鍵**，選擇「**以系統管理員身分執行**」。
 2.  右鍵選單中的選項將會被乾淨地移除。
 3.  之後您可以隨時刪除整個工具資料夾。
 
