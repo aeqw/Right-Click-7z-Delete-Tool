@@ -1,29 +1,39 @@
 @echo off
 @chcp 65001 > nul
+setlocal
+:: 強制切換到腳本所在的目錄
+cd /d "%~dp0"
 
-:: --- 檢查是否有管理員權限 ---
-net session >nul 2>&1
-if %errorlevel% neq 0 (
-    echo.
-    echo ========================================================
-    echo  [錯誤] 權限不足！(Permission Denied)
-    echo.
-    echo  請對此檔案點擊右鍵，選擇「以系統管理員身分執行」。
-    echo  Please right-click and select "Run as administrator".
-    echo ========================================================
-    echo.
-    pause
-    exit
-)
-:: ---------------------------
+:: --- 自動提升權限邏輯 ---
+:check_Permissions
+    echo Checking for administrator privileges...
+    net session >nul 2>&1
+    if %errorLevel% == 0 (
+        goto :got_Privileges
+    ) else (
+        goto :get_Privileges
+    )
 
-echo 正在將「加入壓縮檔(.7z)並刪除」功能登錄到右鍵選單...
-echo (採用 All-in-One VBS 模式)
+:get_Privileges
+    echo Requesting administrator privileges...
+    set "vbs=%temp%\getadmin.vbs"
+    echo Set UAC = CreateObject^("Shell.Application"^) > "%vbs%"
+    echo UAC.ShellExecute "%~s0", "", "", "runas", 1 >> "%vbs%"
+    "%temp%\getadmin.vbs"
+    exit /B
+
+:got_Privileges
+    if exist "%temp%\getadmin.vbs" ( del "%temp%\getadmin.vbs" )
+:: -----------------------
+
+echo ========================================================
+echo  已取得管理員權限，正在加入右鍵選單...
+echo ========================================================
 echo.
 
 set VBS_PATH=%~dp0zip_and_delete.vbs
 
-:: --- 直接呼叫萬能的 VBS 腳本 ---
+:: --- 寫入登錄檔 ---
 reg add "HKEY_CLASSES_ROOT\*\shell\7zCompressAndDelete" /v "" /t REG_SZ /d "加入壓縮檔(.7z)並刪除" /f
 reg add "HKEY_CLASSES_ROOT\*\shell\7zCompressAndDelete\command" /v "" /t REG_SZ /d "wscript.exe \"%VBS_PATH%\" \"%%1\"" /f
 
@@ -32,4 +42,5 @@ reg add "HKEY_CLASSES_ROOT\Directory\shell\7zCompressAndDelete\command" /v "" /t
 
 echo.
 echo 右鍵選單已成功加入！
+echo.
 pause
